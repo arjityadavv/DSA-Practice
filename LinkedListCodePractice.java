@@ -32,8 +32,33 @@ public class LinkedListCodePractice {
 
     public void addNodeAtStart(int val){
         Node startNode = new Node(val);
+        if(head==null){
+            head = startNode;
+            tail = startNode;
+        }
         startNode.next = head;
         head = startNode;
+    }
+
+    public void addNodeAtGivenIndex(int val, int index){
+        int count = 1;
+        Node current = head;
+        Node newNode = new Node(val);
+        while(current!=null && count!=index-1){
+            current = current.next;
+            count++;
+        }
+        if(current==null){
+            if(index==1){
+                addNodeAtEnd(val);
+            }else{
+                System.out.println("Can't add as Linked List Empty or Index value is wrong");
+            }
+        }else{
+            Node temp = current.next;
+            current.next = newNode;
+            newNode.next = temp;
+        }
     }
 
     public static void main(String[] args) {
@@ -43,6 +68,8 @@ public class LinkedListCodePractice {
         linkedList.addNodeAtEnd(33);
         linkedList.addNodeAtEnd(44);
         linkedList.addNodeAtStart(55);
+        linkedList.printLinkedList(head);
+        linkedList.addNodeAtGivenIndex(99, 4);
         linkedList.printLinkedList(head);
     }
 }
