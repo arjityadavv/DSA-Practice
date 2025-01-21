@@ -1,6 +1,10 @@
 public class Palindrome {
     public static void main(String[] args) {
-        String input = "anamana";
+//        checkPalindrome("ababa");
+        findLargestPalindromeSubstring("abababs");
+    }
+
+    public static void checkPalindrome(String input){
         int strLen = input.length();
         Boolean flag = true;
         for(int i=0;i<input.length()/2;i++){
@@ -15,6 +19,9 @@ public class Palindrome {
         }else{
             System.out.println("Not Palindrome");
         }
+    }
+
+    public static void findLargestPalindromeSubstring(String input){
 
     }
 }
