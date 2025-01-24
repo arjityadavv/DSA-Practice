@@ -103,38 +103,26 @@ public class StackPractice {
         System.out.println("Sorted Stack: "+temp);
     }
 
-//    public static Boolean checkBalancedString(String input){
-//        Stack<Character> stack = new Stack<Character>();
-//        for(int i=0;i<input.length();i++){
-//            char b = input.charAt(i);
-//            switch(b){
-//                case '[':
-//                    case '{':
-//                        case '(':
-//                            stack.push(b);
-//                            break;
-//                case ']':
-//                    char pop = stack.pop();
-//                    if(pop=='[' && b!=pop){
-//                        return false;
-//                    }
-//                    break;
-//                case '}':
-//                    char pop1 = stack.pop();
-//                    if(pop1=='{' && b!=pop1){
-//                        return false;
-//                    }
-//                    break;
-//                case ')':
-//                    char pop2 = stack.pop();
-//                    if(pop2=='(' && b!=pop2){
-//                        return false;
-//                    }
-//                    break;
-//            }
-//        }
-//        return stack.isEmpty();
-//    }
+    public static Boolean checkBalancedString(String input){
+        Stack<Character> stack = new Stack<Character>();
+        for(int i=0;i<input.length();i++){
+//            System.out.println(stack);
+            char b = input.charAt(i);
+            if(b=='[' || b=='{' || b=='('){
+                stack.push(b);
+            }else if(b==']' || b=='}' || b==')'){
+                char top = stack.pop();
+                if(b==']' && top!='['){
+                    return false;
+                }else if(b=='}' && top!='{'){
+                    return false;
+                }else if(b==')' && top!='('){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
 
     public static void main(String[] args) {
         stackIntegers();
@@ -159,8 +147,8 @@ public class StackPractice {
         stack2.push(55);
         stack2.push(4);
         sortStack(stack2);
-//        System.out.println("Check Balanced String: "+checkBalancedString("[2+{2+2}](4+5)"));
-//        System.out.println("Check Balanced String: "+checkBalancedString("[2+{2+2}(4+5)"));
-//        System.out.println("Check Balanced String: "+checkBalancedString("[2+2+2}]4+5)"));
+        System.out.println("Check Balanced String: "+checkBalancedString("[2+{2+2}](4+5)"));
+        System.out.println("Check Balanced String: "+checkBalancedString("[2+{2+2}(4+5)"));
+        System.out.println("Check Balanced String: "+checkBalancedString("[2+2+2}]4+5)"));
     }
 }
