@@ -1,3 +1,5 @@
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Stack;
 
 public class QueuePractice {
@@ -58,12 +60,27 @@ public class QueuePractice {
         }
     }
 
+    public static void enQueueWithArray(int x){
+        rear++;
+        a[rear] = x;
+        int currentRear = rear;
+        while(currentRear!=0){
+            if(a[currentRear-1]>x){
+                int temp = a[currentRear];
+                a[currentRear] = a[currentRear-1];
+                a[currentRear-1] = temp;
+            }
+            currentRear--;
+        }
+    }
+
     public static void main(String[] args) {
-        QueuePractice queue = new QueuePractice(4);
+        QueuePractice queue = new QueuePractice(5);
         queue.enQueue(4);
         queue.enQueue(3);
         queue.enQueue(7);
         queue.enQueue(1);
+        queue.enQueue(5);
         printQueue(); // 4 3 7 1
         queue.deQueue();
         printQueue(); // 3 7 1
@@ -75,6 +92,22 @@ public class QueuePractice {
         printQueue();
         reverseQueueUsingStack();
         printQueue();
+        Queue<Integer> priority = new PriorityQueue<>();
+        priority.add(99);
+        priority.add(77);
+        priority.add(111);
+        priority.add(200);
+        for(int ele : priority){
+            System.out.print(ele+" ");
+            System.out.println();
+        }
+        QueuePractice queue1 = new QueuePractice(5);
+        queue1.enQueueWithArray(50);
+        queue1.enQueueWithArray(70);
+        queue1.enQueueWithArray(10);
+        queue1.enQueueWithArray(40);
+        queue1.enQueueWithArray(30);
 
+        printQueue();
     }
 }
