@@ -1,6 +1,4 @@
-import java.net.Inet4Address;
 import java.util.*;
-import java.util.jar.Attributes;
 
 public class CodingQuestionPractice {
 
@@ -155,7 +153,7 @@ public class CodingQuestionPractice {
     // Subarray found from Index 5 to 6
     // Subarray found from Index 6 to 9
     // Subarray found from Index 0 to 10
-    public static void subArraysWithZeroSum(int[] arr){
+    public static void question4_subArraysWithZeroSum(int[] arr){
         List<List<Integer>> finalList = new ArrayList<>();
         for(int i=0;i<arr.length;i++){
             int sum = arr[i];
@@ -186,6 +184,41 @@ public class CodingQuestionPractice {
 
     }
 
+    // Write a function in your preferred programming language to perform string compression. The function should take a string as input and return a compressed version of the string. The compression works as follows:
+    //Consecutive occurrences of the same character are replaced by the character followed by the count of its occurrences.
+    //If a character appears only once, it is left as is (no count is appended).
+    // Input: aaabbbacfwww
+    // Output: a3b3acfw3
+    public static String question5_stringCompression(String input){
+        String output = "";
+        for(int i=0;i<input.length();i++){
+            int count = 1;
+            for(int j=i+1;j<input.length();j++) {
+                if (input.charAt(i) == input.charAt(j)) {
+                    count++;
+                    if(j==input.length()-1){
+                        if(count>1){
+                            output = output + input.charAt(i)+count;
+                        }else{
+                            output = output + input.charAt(i);
+                        }
+                        i = input.length();
+                    }
+                } else {
+                    if(count>1){
+                        output = output + input.charAt(i)+count;
+                    }else{
+                        output = output + input.charAt(i);
+                    }
+
+                    i = j - 1;
+                    break;
+                }
+            }
+        }
+        return output;
+    }
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-1, 2, -3, -5, 4, -6, 0})));
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-12, 11, -13, -5, 6, -7, 5, -3, -6})));
@@ -202,11 +235,16 @@ public class CodingQuestionPractice {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println(question3(Arrays.asList("eat","tea","tan","ate","nat","bat")));
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        subArraysWithZeroSum(new int[]{6, 3, -1, -3, 4, -2, 2, 4, 6, -12, -7});
-        subArraysWithZeroSum(new int[]{1,2,3,4,5});
-        subArraysWithZeroSum(new int[]{0,0,0});
-        subArraysWithZeroSum(new int[]{5,-5,0});
-        subArraysWithZeroSum(new int[]{3, -3, -3, -3, -3, -3});
+        question4_subArraysWithZeroSum(new int[]{6, 3, -1, -3, 4, -2, 2, 4, 6, -12, -7});
+        question4_subArraysWithZeroSum(new int[]{1,2,3,4,5});
+        question4_subArraysWithZeroSum(new int[]{0,0,0});
+        question4_subArraysWithZeroSum(new int[]{5,-5,0});
+        question4_subArraysWithZeroSum(new int[]{3, -3, -3, -3, -3, -3});
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(question5_stringCompression("aaabbbacfwww"));
+        System.out.println(question5_stringCompression("aaabbbcccccdddd"));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
     }
 }
 
