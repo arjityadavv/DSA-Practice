@@ -42,11 +42,12 @@ public class CodingQuestionPractice {
         return arr;
     }
 
-    //Reverse a string preserving space position
+    //Reverse a string preserving space position using n*n approach
     //input - I Am Not String
     //output- g ni rtS toNmAI
 
     public static String question2(String input){
+        System.out.println("question2 >>>>>>>>>>>>>>>>>>");
         List<Integer> space = new ArrayList<>();
         for(int i=0;i<input.length();i++){
             if(input.charAt(i)==' '){
@@ -75,12 +76,137 @@ public class CodingQuestionPractice {
         return sb1.toString();
     }
 
+    //Reverse a string preserving space position using stack approach
+    //input - I Am Not String
+    //output- g ni rtS toNmAI
+
+    public static String question2Stack(String input){
+        System.out.println("question2Stack >>>>>>>>>>>>>>>>>>");
+        if(input.length()==0){
+            return "Input String Blank";
+        }
+        Stack<Character> stack = new Stack<>();
+//        Character[] output = new Character[input.length()];
+        String output = "";
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i)!=' '){
+                stack.push(input.charAt(i));
+            }
+        }
+
+        if(stack.isEmpty()){
+            return input;
+        }
+
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i)==' '){
+                output = output + ' ';
+            }else{
+                output = output + stack.pop();
+            }
+        }
+        return output;
+    }
+
+    //Given an array of strings strs, group the anagrams together.
+    //(need to cover all the test cases with time and space complexity)
+    // Input: strs = ["eat","tea","tan","ate","nat","bat"]
+    // Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+    public static List<List<String>> question3(List<String> strList){
+        List<List<String>> output = new ArrayList<>();
+        Set<Integer> done = new HashSet<>();
+        for(int i=0;i<strList.size();i++){
+            if(done.contains(i)){
+                continue;
+            }
+            done.add(i);
+            List<String> currentList = new ArrayList<>();
+            if(!currentList.contains(strList.get(i))){
+                currentList.add(strList.get(i));
+            }
+            for(int j=i;j<strList.size();j++){
+                if(done.contains(j)){
+                    continue;
+                }
+                if(j!=strList.size()-1 && anagramCheck(strList.get(i),strList.get(j))){
+                    done.add(j);
+                    currentList.add(strList.get(j));
+                }
+            }
+            output.add(currentList);
+        }
+
+        return output;
+    }
+
+    public static Boolean anagramCheck(String s1, String s2){
+        char[] c1 = s1.toCharArray();
+        char[] c2 = s2.toCharArray();
+        Arrays.sort(c1);
+        Arrays.sort(c2);
+        return Arrays.equals(c1,c2);
+    }
+
+    //Print all subarrays with 0 sum
+    // Input: arr = [6, 3, -1, -3, 4, -2, 2, 4, 6, -12, -7]
+    // Output:
+    // Subarray found from Index 2 to 4
+    // Subarray found from Index 2 to 6
+    // Subarray found from Index 5 to 6
+    // Subarray found from Index 6 to 9
+    // Subarray found from Index 0 to 10
+    public static void subArraysWithZeroSum(int[] arr){
+        List<List<Integer>> finalList = new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+            int sum = arr[i];
+            if(sum==0){
+                List<Integer> found = new ArrayList<>();
+                found.add(i);
+                found.add(i);
+                finalList.add(found);
+            }
+            for(int j=i+1;j<arr.length;j++){
+                sum = sum + arr[j];
+                if(sum==0){
+                    List<Integer> found = new ArrayList<>();
+                    found.add(i);
+                    found.add(j);
+                    finalList.add(found);
+                }
+            }
+        }
+        if(!finalList.isEmpty()){
+            for(List<Integer> ele : finalList){
+                System.out.println("Subarray found from Index "+ele.get(0)+" to "+ele.get(1));
+            }
+        }else{
+            System.out.println("No SubArray found!");
+        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+    }
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-1, 2, -3, -5, 4, -6, 0})));
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-12, 11, -13, -5, 6, -7, 5, -3, -6})));
         System.out.println(Arrays.toString(question1_approachNormal(new int[]{-12, 11, -13, -5, 6, -7, 5, -3, -6})));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println(question2("I Am Not String"));
         System.out.println(question2("I Am Arjit Yadav"));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(question2Stack("I Am Not String"));
+        System.out.println(question2Stack("I Am Arjit Yadav"));
+        System.out.println(question2Stack(""));
+        System.out.println(question2Stack(" "));
+        System.out.println(question2Stack("ABC"));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println(question3(Arrays.asList("eat","tea","tan","ate","nat","bat")));
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        subArraysWithZeroSum(new int[]{6, 3, -1, -3, 4, -2, 2, 4, 6, -12, -7});
+        subArraysWithZeroSum(new int[]{1,2,3,4,5});
+        subArraysWithZeroSum(new int[]{0,0,0});
+        subArraysWithZeroSum(new int[]{5,-5,0});
+        subArraysWithZeroSum(new int[]{3, -3, -3, -3, -3, -3});
     }
 }
 
