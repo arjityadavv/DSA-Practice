@@ -219,6 +219,22 @@ public class CodingQuestionPractice {
         return output;
     }
 
+    //Write a function to find the first non-repeating character in a given string s and return its index. If all characters are repeating or the string is empty, return -1.
+//    public static Integer firstNonRepeatingIndex(String s){
+//        int count = 0;
+//        for(int i=0;i<s.length();i++){
+//            if(i==s.length()-1){
+//                return i;
+//            }
+//            if(count==0 && s.charAt(i)!=s.charAt(i+1)){
+//                return i+1;
+//            }else{
+//                count++;
+//            }
+//        }
+//        return -1;
+//    }
+
     public static void main(String[] args) {
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-1, 2, -3, -5, 4, -6, 0})));
         System.out.println(Arrays.toString(question1_approachStack(new int[]{-12, 11, -13, -5, 6, -7, 5, -3, -6})));
@@ -244,6 +260,7 @@ public class CodingQuestionPractice {
         System.out.println(question5_stringCompression("aaabbbacfwww"));
         System.out.println(question5_stringCompression("aaabbbcccccdddd"));
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//        System.out.println(firstNonRepeatingIndex("aabbccd"));
 
     }
 }
