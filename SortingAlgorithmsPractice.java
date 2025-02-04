@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.MIN_VALUE;
 
 public class SortingAlgorithmsPractice {
 
@@ -48,7 +47,7 @@ public class SortingAlgorithmsPractice {
         }
     }
 
-    public static void sort(int[] arr){
+    public static void mergeSort(int[] arr){
         if(arr.length<2){
             return;
         }
@@ -61,8 +60,8 @@ public class SortingAlgorithmsPractice {
         for(int i=middle;i<arr.length;i++){
             right[i-middle] = arr[i];
         }
-        sort(left);
-        sort(right);
+        mergeSort(left);
+        mergeSort(right);
         merge(left,right,arr);
     }
 
@@ -94,7 +93,7 @@ public class SortingAlgorithmsPractice {
         selectionSort(arr);
         arr = new int[]{4,5,1,9,2};
         System.out.println("\nMerge Sort >>>>>>>>>>>");
-        sort(arr);
+        mergeSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
